@@ -1,0 +1,562 @@
+/* 
+  도넛 픽 (Donut Pick) - CSS 스타일시트
+  아기자기한 마켓 감성을 위해 부드러운 파스텔 톤과 둥글둥글한 디자인을 적용했습니다.
+*/
+
+/* 1. 디자인 시스템 변수 정의 (테마 색상) */
+:root {
+    --color-bg-main: #FFFDF9;       /* 연한 크림빛 메인 배경색 */
+    --color-primary: #FFB7B2;       /* 파스텔 핑크 */
+    --color-primary-dark: #FF9B94;  /* 진한 파스텔 핑크 */
+    --color-accent: #E8F5E9;        /* 파스텔 그린 (민트 포인트) */
+    --color-text-main: #4A3E3D;     /* 따뜻한 느낌의 짙은 브라운 텍스트 */
+    --color-text-muted: #8D7B7A;   /* 부드러운 회갈색 보조 텍스트 */
+    --color-card-bg: #FFFFFF;       /* 도넛 카드의 흰색 배경 */
+    --color-border: #FFEBE9;        /* 은은한 핑크빛 테두리 */
+    --font-fancy: 'Gamja Flower', cursive; /* 손글씨 느낌의 포인트 폰트 */
+    --font-normal: 'Noto Sans KR', sans-serif; /* 가독성이 좋은 본문 폰트 */
+}
+
+/* 2. 기본 초기화 및 스타일 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    font-family: var(--font-normal);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* 3. 헤더 영역 스타일 */
+.shop-header {
+    width: 100%;
+}
+
+.header-banner {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 찌그러지지 않고 꽉 차게 조절 */
+    filter: brightness(0.75); /* 배너 위 텍스트가 잘 보이도록 이미지를 약간 어둡게 처리 */
+}
+
+.banner-overlay {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4); /* 글씨 뒤에 짙은 그림자 효과 */
+    padding: 20px;
+}
+
+.shop-title {
+    font-family: var(--font-fancy);
+    font-size: 4rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.shop-subtitle {
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+
+/* 4. 카테고리 네비게이션 스타일 */
+.category-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 30px 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 10px rgba(255, 183, 178, 0.15); /* 은은한 핑크빛 그림자 */
+    position: sticky; /* 스크롤 시 상단에 고정 */
+    top: 0;
+    z-index: 100;
+}
+
+.category-btn {
+    font-family: var(--font-fancy);
+    font-size: 1.3rem;
+    padding: 10px 22px;
+    border: 2px solid var(--color-border);
+    border-radius: 30px;
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    cursor: pointer;
+    transition: all 0.3s ease; /* 모든 상태 변화를 부드럽게 연결 */
+    outline: none;
+}
+
+.category-btn:hover {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    border-color: var(--color-primary);
+    transform: scale(1.05); /* 마우스 올렸을 때 살짝 커짐 */
+}
+
+/* 활성화된 카테고리 버튼 스타일 */
+.category-btn.active {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 8px rgba(255, 183, 178, 0.4);
+}
+
+/* 5. 메인 콘텐츠 스타일 (상품 진열대와 장바구니 2단 레이아웃) */
+.shop-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.shop-content-wrapper {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr; /* 좌측 상품 영역 1.8비율, 우측 장바구니 1비율 */
+    gap: 30px;
+    align-items: start; /* 각 컬럼이 높이에 맞게 시작점에 정렬 */
+}
+
+.products-section, .cart-section {
+    width: 100%;
+}
+
+.section-title {
+    font-family: var(--font-fancy);
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+/* 제목 밑에 귀여운 핑크 포인트 선 추가 */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-primary);
+    border-radius: 2px;
+    margin: 8px auto 0 auto;
+}
+
+/* 도넛 카드 배치용 그리드 시스템 */
+.donut-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+/* 6. 개별 도넛 카드 스타일 */
+.donut-card {
+    background-color: var(--color-card-bg);
+    border: 2px solid var(--color-border);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(255, 183, 178, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* 마우스 올렸을 때 위로 살짝 떠오르고 그림자가 진해지는 효과 */
+.donut-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(255, 183, 178, 0.25);
+    border-color: var(--color-primary);
+}
+
+/* 카드 내 이미지 스타일 */
+.donut-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain; /* 이미지가 비율대로 상자 안에 이쁘게 채워짐 */
+    border-radius: 12px;
+    background-color: var(--color-bg-main); /* 이미지 배경에 부드러운 톤 추가 */
+    padding: 10px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* 마우스 오버 시 도넛 이미지 살짝 회전/확대 효과 */
+.donut-card:hover img {
+    transform: scale(1.05) rotate(3deg);
+}
+
+.donut-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+    color: var(--color-text-main);
+}
+
+/* 카테고리 칩(Tag) 스타일 */
+.donut-card .category {
+    font-size: 0.8rem;
+    color: var(--color-primary-dark);
+    background-color: #FFF2F1;
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    font-weight: bold;
+    align-self: center; /* 가운데 정렬 */
+}
+
+.donut-card .price {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #FF7B72; /* 눈에 띄는 다홍색 가격표 */
+    margin-bottom: 18px;
+}
+
+/* 담기 버튼 스타일 */
+.pick-btn {
+    width: 100%;
+    font-family: var(--font-fancy);
+    font-size: 1.2rem;
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 4px 6px rgba(255, 183, 178, 0.2);
+}
+
+.pick-btn:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.pick-btn:active {
+    transform: scale(0.98); /* 버튼 클릭 시 살짝 들어가는 모션 */
+}
+
+/* 7. 장바구니 영역 스타일 */
+.cart-container {
+    background-color: #FFFFFF;
+    border: 2px solid var(--color-border);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(255, 183, 178, 0.1);
+    position: sticky; /* 스크롤 시 화면에 고정 */
+    top: 110px; /* 카테고리 nav 바 밑에 알맞게 배치 */
+    max-height: calc(100vh - 160px); /* 뷰포트 높이에 맞춰 최대 크기 제한 */
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-list {
+    overflow-y: auto; /* 아이템이 많아지면 스크롤이 생기도록 처리 */
+    max-height: 350px;
+    margin-bottom: 20px;
+    padding-right: 5px;
+}
+
+/* 브라우저 스크롤바 디자인 (장바구니와 어울리게 얇고 부드럽게) */
+.cart-list::-webkit-scrollbar {
+    width: 6px;
+}
+.cart-list::-webkit-scrollbar-track {
+    background: var(--color-bg-main);
+    border-radius: 10px;
+}
+.cart-list::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 10px;
+}
+
+.cart-empty-msg {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    padding: 40px 10px;
+    line-height: 1.8;
+}
+
+/* 개별 장바구니 아이템 스타일 */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--color-border);
+    animation: fadeIn 0.3s ease; /* 추가될 때 살짝 나타나는 애니메이션 */
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    background-color: var(--color-bg-main);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-info h4 {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    color: var(--color-text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* 글자가 넘치면 말줄임표 (...) */
+}
+
+.cart-item-price {
+    font-size: 0.9rem;
+    color: #FF7B72;
+    font-weight: bold;
+}
+
+/* 수량 조절 버튼 그룹 */
+.cart-quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 8px;
+}
+
+.qty-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--color-primary);
+    background-color: #FFFFFF;
+    color: var(--color-primary-dark);
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.qty-btn:hover {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+}
+
+.qty-val {
+    font-size: 0.95rem;
+    font-weight: bold;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* 삭제 버튼 (쓰레기통 아이콘) */
+.cart-remove-btn {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    transition: color 0.2s, transform 0.1s;
+    padding: 4px;
+}
+
+.cart-remove-btn:hover {
+    color: #FF5A50;
+    transform: scale(1.1);
+}
+
+/* 장바구니 요약(합계 및 주문) 영역 */
+.cart-summary {
+    border-top: 2px solid var(--color-border);
+    padding-top: 20px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.total-label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-text-muted);
+}
+
+.total-price-val {
+    font-size: 1.5rem;
+    color: #FF7B72;
+}
+
+.total-price-val strong {
+    font-weight: 800;
+}
+
+.order-section {
+    margin-top: 20px;
+    border-top: 1px dashed var(--color-border);
+    padding-top: 20px;
+}
+
+.order-section-title {
+    font-family: var(--font-fancy);
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--color-text-main);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--color-text-muted);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid var(--color-border);
+    border-radius: 10px;
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* 입력 필드에 마우스를 클릭했을 때(포커스)의 파스텔 핑크 하이라이트 */
+.input-group input:focus {
+    border-color: var(--color-primary);
+    background-color: #FFFFFF;
+    box-shadow: 0 0 8px rgba(255, 183, 178, 0.4);
+}
+
+/* 비활성화(disabled) 상태일 때의 스타일 */
+.input-group input:disabled {
+    background-color: #F5F5F5;
+    border-color: #E0E0E0;
+    color: #BDBDBD;
+    cursor: not-allowed;
+}
+
+.checkout-btn {
+    width: 100%;
+    font-family: var(--font-fancy);
+    font-size: 1.3rem;
+    background-color: var(--color-text-main);
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.checkout-btn:hover:not(:disabled) {
+    background-color: #332A29;
+}
+
+.checkout-btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+/* 비활성화된 주문 버튼 스타일 */
+.checkout-btn:disabled {
+    background-color: #E0E0E0;
+    color: #9E9E9E;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* 아이템 추가 시의 미세한 페이드인 효과 정의 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 8. 푸터 영역 스타일 */
+.shop-footer {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 60px;
+    border-top: 2px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    background-color: #FFFFFF;
+}
+
+/* 9. 반응형 레이아웃 조절 */
+@media (max-width: 992px) {
+    /* 화면이 약간 좁아지면 2단 컬럼 비율을 1:1로 조정하거나 상하로 나눕니다. */
+    .shop-content-wrapper {
+        grid-template-columns: 1fr; /* 세로 1단으로 떨어뜨림 */
+        gap: 40px;
+    }
+    
+    .cart-container {
+        position: static; /* 화면 고정 해제 */
+        max-height: none;
+    }
+    
+    .cart-list {
+        max-height: none; /* 모바일에서는 스크롤 대신 다 보여줌 */
+    }
+}
+
+@media (max-width: 768px) {
+    .shop-title {
+        font-size: 2.8rem;
+    }
+    
+    .shop-subtitle {
+        font-size: 1rem;
+    }
+
+    .header-banner {
+        height: 250px;
+    }
+
+    .category-nav {
+        gap: 8px;
+        padding: 15px 5px;
+    }
+
+    .category-btn {
+        font-size: 1.1rem;
+        padding: 8px 15px;
+    }
+
+    .donut-grid {
+        gap: 20px;
+    }
+}

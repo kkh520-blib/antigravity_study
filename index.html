@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도넛 픽 (Donut Pick) - 나만의 도넛 마켓</title>
+    <!-- 웹페이지 검색 엔진 최적화(SEO)를 위한 메타 태그 -->
+    <meta name="description" content="아기자기한 도넛 마켓 '도넛 픽'에서 원하는 도넛을 골라 담아보세요! 쇼핑 서비스의 기초 동작을 배울 수 있는 웹사이트입니다.">
+    
+    <!-- 아기자기한 느낌을 주는 구글 웹폰트 불러오기 (Gamja Flower 폰트) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- 외부 스타일시트(style.css) 연결 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 1. 상단 헤더 영역: 서비스 타이틀과 상점 배너 -->
+    <header class="shop-header">
+        <div class="header-banner">
+            <!-- generate_image로 만든 배너 이미지 표시 -->
+            <img src="images/banner.png" alt="도넛 픽 마켓 배너" class="banner-img">
+            <div class="banner-overlay">
+                <h1 class="shop-title">🍩 Donut Pick 🍩</h1>
+                <p class="shop-subtitle">달콤한 행복을 골라 담는 나만의 도넛 마켓</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. 카테고리 네비게이션 영역: 전체, 초코, 딸기, 기본 필터링 버튼 -->
+    <nav class="category-nav">
+        <!-- data-category 속성을 사용해 자바스크립트에서 어떤 버튼이 클릭되었는지 쉽게 판별합니다. -->
+        <button class="category-btn active" data-category="all">전체보기</button>
+        <button class="category-btn" data-category="choco">🍫 초코 도넛</button>
+        <button class="category-btn" data-category="strawberry">🍓 딸기 도넛</button>
+        <button class="category-btn" data-category="classic">🥯 기본 도넛</button>
+    </nav>
+
+    <!-- 3. 메인 콘텐츠 영역: 상품 진열대와 장바구니 -->
+    <main class="shop-main">
+        <div class="shop-content-wrapper">
+            <!-- 좌측: 상품 진열대 영역 -->
+            <section class="products-section">
+                <h2 class="section-title">오늘의 추천 도넛</h2>
+                <div id="donut-list" class="donut-grid">
+                    <!-- 자바스크립트가 여기에 도넛 카드를 동적으로 렌더링합니다. -->
+                </div>
+            </section>
+
+            <!-- 우측: 장바구니 영역 -->
+            <section class="cart-section">
+                <h2 class="section-title">🛒 내 장바구니</h2>
+                <div class="cart-container">
+                    <!-- 장바구니 아이템 리스트가 동적으로 꽂힐 영역 -->
+                    <div id="cart-list" class="cart-list">
+                        <p class="cart-empty-msg">장바구니가 비어 있습니다.<br>맛있는 도넛을 담아보세요! 🍩</p>
+                    </div>
+                    
+                    <!-- 실시간 최종 합계 표시 영역 -->
+                    <div class="cart-summary">
+                        <div class="total-row">
+                            <span class="total-label">최종 합계 금액</span>
+                            <span class="total-price-val"><strong id="cart-total-price">0</strong>원</span>
+                        </div>
+                    </div>
+
+                    <!-- [3단계 추가] 주문자 정보 입력 폼 -->
+                    <div id="order-section" class="order-section">
+                        <h3 class="order-section-title">주문자 정보</h3>
+                        <div class="input-group">
+                            <label for="order-name">이름</label>
+                            <input type="text" id="order-name" placeholder="이름을 입력하세요" disabled>
+                        </div>
+                        <div class="input-group">
+                            <label for="order-phone">연락처</label>
+                            <input type="tel" id="order-phone" placeholder="예: 010-1234-5678" disabled>
+                        </div>
+                        <button id="submit-order-btn" class="checkout-btn" onclick="submitOrder()" disabled>주문 완료</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 4. 하단 정보 영역 -->
+    <footer class="shop-footer">
+        <p>&copy; 2026 Donut Pick. All rights reserved. | 쇼핑 서비스 기초 실습 예제</p>
+    </footer>
+
+    <!-- 자바스크립트 파일 연결: HTML 요소들이 다 그려진 후 실행되도록 body 태그 맨 아래에 배치합니다. -->
+    <script src="app.js"></script>
+</body>
+</html>
